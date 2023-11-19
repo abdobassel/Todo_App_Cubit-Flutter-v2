@@ -43,6 +43,7 @@ class AppCubit extends Cubit<AppBaseStates> {
       },
       onOpen: (database) {
         print('opened database');
+        getDatabase(database);
       },
     ).then((value) {
       database = value;
@@ -51,23 +52,30 @@ class AppCubit extends Cubit<AppBaseStates> {
   }
 
   void insertDatabase(
-      /*{required String title,
+      {required String title,
       required String date,
-      required String time}*/
-      ) async {
+      required String time}) async {
     return await database?.transaction((txn) async {
       try {
         txn
             .rawInsert(
-                'INSERT INTO tasks (title,date,time,status) VALUES ("Test","545445","12.01","new")')
+                'INSERT INTO tasks (title,date,time,status) VALUES ("$title","$date","$time","new")')
             .then((value) {
           print(value);
           emit(AppInserteDatabase());
+          getDatabase(database);
         });
         print('inserted database');
       } catch (error) {
         print('error is ${error.toString()}');
       }
+    });
+  }
+
+  void getDatabase(database) {
+    database.rawQuery('SELECT * FROM tasks').then((value) {
+      print(value);
+      emit(AppGetDatabase());
     });
   }
 }

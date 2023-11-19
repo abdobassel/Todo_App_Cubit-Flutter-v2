@@ -21,7 +21,7 @@ class HomeLayout extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                cubit.insertDatabase();
+                cubit.insertDatabase(time: '5', title: 'llll', date: '2222');
               },
               child: Icon(Icons.edit),
             ),

@@ -34,7 +34,7 @@ class AppCubit extends Cubit<AppBaseStates> {
         // When creating the db, create the table
         await database
             .execute(
-                'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, date TEXT, time TEXT)')
+                'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, date TEXT, time TEXT,status TEXT)')
             .then((value) {
           print('crated table');
         });
@@ -47,6 +47,27 @@ class AppCubit extends Cubit<AppBaseStates> {
     ).then((value) {
       database = value;
       emit(AppCreateDatabase());
+    });
+  }
+
+  void insertDatabase(
+      /*{required String title,
+      required String date,
+      required String time}*/
+      ) async {
+    return await database?.transaction((txn) async {
+      try {
+        txn
+            .rawInsert(
+                'INSERT INTO tasks (title,date,time,status) VALUES ("Test","545445","12.01","new")')
+            .then((value) {
+          print(value);
+          emit(AppInserteDatabase());
+        });
+        print('inserted database');
+      } catch (error) {
+        print('error is ${error.toString()}');
+      }
     });
   }
 }

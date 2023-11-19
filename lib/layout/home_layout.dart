@@ -20,7 +20,9 @@ class HomeLayout extends StatelessWidget {
               title: Text('${cubit.titles[cubit.currentIndex]}'),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                cubit.insertDatabase();
+              },
               child: Icon(Icons.edit),
             ),
             bottomNavigationBar: BottomNavigationBar(

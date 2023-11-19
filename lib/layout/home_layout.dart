@@ -29,29 +29,17 @@ class HomeLayout extends StatelessWidget {
               },
               currentIndex: cubit.currentIndex,
               iconSize: 30,
-              selectedFontSize: 30,
-              unselectedFontSize: 30,
+              selectedFontSize: 25,
+              unselectedFontSize: 28,
               items: [
                 BottomNavigationBarItem(
-                    icon: IconButton(
-                      icon: Icon(Icons.task),
-                      onPressed: () {},
-                    ),
-                    label: 'NewTask'),
+                    icon: Icon(Icons.task_outlined), label: 'NewTasks'),
+                BottomNavigationBarItem(icon: Icon(Icons.done), label: 'Done'),
                 BottomNavigationBarItem(
-                    icon: IconButton(
-                      icon: Icon(Icons.done),
-                      onPressed: () {},
-                    ),
-                    label: 'Done'),
-                BottomNavigationBarItem(
-                    icon: IconButton(
-                      icon: Icon(Icons.archive_rounded),
-                      onPressed: () {},
-                    ),
-                    label: 'Archived'),
+                    icon: Icon(Icons.archive_rounded), label: 'Archived'),
               ],
             ),
+            body: cubit.screens[cubit.currentIndex],
           );
         },
       ),

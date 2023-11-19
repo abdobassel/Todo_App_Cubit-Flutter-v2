@@ -1,7 +1,11 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app_v2/bloc_cubit/observer.dart';
 import 'package:todo_app_v2/layout/home_layout.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
+
   runApp(const Todo_v2());
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app_v2/bloc_cubit/states.dart';
@@ -18,6 +17,11 @@ class AppCubit extends Cubit<AppBaseStates> {
     DoneTasksScreen(),
     ArchivedTasksScreen(),
   ];
+  bool isbootmSheetOpen = false;
+  void bootomSheetOpen() {
+    isbootmSheetOpen = !isbootmSheetOpen;
+  }
+
   List<String> titles = ["New Tasks", "Done Tasks", "Archived Tasks"];
 
   void changeBottomSheetindex(int index) {

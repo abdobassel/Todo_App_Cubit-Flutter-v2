@@ -22,6 +22,15 @@ class HomeLayout extends StatelessWidget {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 cubit.insertDatabase(time: '5', title: 'llll', date: '2222');
+                if (cubit.isbootmSheetOpen) {
+                  Navigator.pop(context);
+                  cubit.isbootmSheetOpen = false;
+                } else {
+                  scaffoldKey.currentState?.showBottomSheet((context) {
+                    return Text('data');
+                  });
+                  cubit.isbootmSheetOpen = true;
+                }
               },
               child: Icon(Icons.edit),
             ),

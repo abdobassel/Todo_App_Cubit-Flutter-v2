@@ -18,8 +18,14 @@ class AppCubit extends Cubit<AppBaseStates> {
     ArchivedTasksScreen(),
   ];
   bool isbootmSheetOpen = false;
-  void bootomSheetOpen() {
-    isbootmSheetOpen = !isbootmSheetOpen;
+  IconData fabicon = Icons.edit;
+  void changeIconsheet() {
+    if (isbootmSheetOpen) {
+      fabicon = Icons.add;
+    } else {
+      fabicon = Icons.edit;
+    }
+    emit(AppIconChangeStates());
   }
 
   List<String> titles = ["New Tasks", "Done Tasks", "Archived Tasks"];

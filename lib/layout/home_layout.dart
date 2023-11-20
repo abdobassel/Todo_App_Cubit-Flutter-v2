@@ -25,14 +25,16 @@ class HomeLayout extends StatelessWidget {
                 if (cubit.isbootmSheetOpen) {
                   Navigator.pop(context);
                   cubit.isbootmSheetOpen = false;
+                  cubit.changeIconsheet();
                 } else {
                   scaffoldKey.currentState?.showBottomSheet((context) {
                     return Text('data');
                   });
                   cubit.isbootmSheetOpen = true;
+                  cubit.changeIconsheet();
                 }
               },
-              child: Icon(Icons.edit),
+              child: Icon(cubit.fabicon),
             ),
             bottomNavigationBar: BottomNavigationBar(
               onTap: (index) {

@@ -20,7 +20,7 @@ class HomeLayout extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppBaseStates>(
         listener: (context, state) {
           if (state is AppInserteDatabase) {
-            Navigator.of(context);
+            Navigator.pop(context);
 
             titleController.clear();
             timeController.clear();

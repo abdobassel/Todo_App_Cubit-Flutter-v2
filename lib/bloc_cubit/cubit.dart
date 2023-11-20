@@ -122,4 +122,13 @@ class AppCubit extends Cubit<AppBaseStates> {
       emit(AppDeleteDatabase());
     });
   }
+
+  // update logic
+  void updateDatabase({required String status, required int id}) async {
+    database?.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?',
+        ['$status', id]).then((value) {
+      getDatabase(database);
+      emit(AppUpdateDatabase());
+    });
+  }
 }

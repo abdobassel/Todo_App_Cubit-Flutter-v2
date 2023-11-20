@@ -62,7 +62,9 @@ Widget ItemTaskBuilder(
                 width: 15,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  AppCubit.get(context).updateDatabase(status: 'done', id: id);
+                },
                 icon: Icon(Icons.check_circle),
                 color: Color(0xffD5EBCB),
                 iconSize: 30,
@@ -71,7 +73,10 @@ Widget ItemTaskBuilder(
                 width: 5,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  AppCubit.get(context)
+                      .updateDatabase(status: 'archived', id: id);
+                },
                 icon: Icon(Icons.archive),
                 color: Colors.white,
                 iconSize: 30,

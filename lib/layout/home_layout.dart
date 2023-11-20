@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app_v2/bloc_cubit/cubit.dart';
 import 'package:todo_app_v2/bloc_cubit/states.dart';
+import 'package:todo_app_v2/components/components.dart';
 
 class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  var titleController = TextEditingController();
+  var dateController = TextEditingController();
+  var timeController = TextEditingController();
+  var keyForm = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -28,7 +35,60 @@ class HomeLayout extends StatelessWidget {
                   cubit.changeIconsheet();
                 } else {
                   scaffoldKey.currentState?.showBottomSheet((context) {
-                    return Text('data');
+                    return Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(18.0),
+                      child: Form(
+                        key: keyForm,
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          DefaultTextForm(
+                              controller: titleController,
+                              labeltext: 'Title',
+                              validate: (value) {},
+                              type: TextInputType.text,
+                              prefix: Icons.title),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          DefaultTextForm(
+                              controller: timeController,
+                              onTap: () {
+                                showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.now())
+                                    .then((value) {
+                                  timeController.text =
+                                      value!.format(context).toString();
+                                });
+                              },
+                              labeltext: 'Time',
+                              validate: (value) {},
+                              type: TextInputType.text,
+                              prefix: Icons.access_time_filled),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          DefaultTextForm(
+                              controller: dateController,
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.parse('2024-12-31'))
+                                    .then((value) {
+                                  dateController.text =
+                                      DateFormat.yMMMd().format(value!);
+                                });
+                              },
+                              labeltext: 'Date',
+                              validate: (value) {},
+                              type: TextInputType.text,
+                              prefix: Icons.calendar_month_rounded)
+                        ]),
+                      ),
+                    );
                   });
                   cubit.isbootmSheetOpen = true;
                   cubit.changeIconsheet();

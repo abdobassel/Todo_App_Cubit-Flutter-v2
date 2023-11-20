@@ -68,3 +68,39 @@ Widget ItemTaskBuilder(
         ],
       ),
     );
+
+//Form Field Text
+Widget DefaultTextForm({
+  required TextEditingController controller,
+  required String? labeltext,
+  required String? Function(String?)? validate,
+  String? Function(String?)? onSubmit,
+  String? Function(String?)? onchange, //null-safety
+  required TextInputType type,
+  required IconData prefix,
+  bool isPassword = false,
+  IconData? suffixIcon,
+  Function()? showPassfunc,
+  Function()? onTap,
+}) =>
+    TextFormField(
+      onTap: onTap,
+      onChanged: onchange,
+      obscureText: isPassword,
+      onFieldSubmitted: onSubmit,
+      validator: validate,
+      textAlign: TextAlign.center,
+      controller: controller,
+      keyboardType: type,
+      decoration: InputDecoration(
+        labelText: labeltext,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+        floatingLabelAlignment: FloatingLabelAlignment.center,
+        prefix: Icon(
+          prefix,
+        ),
+        suffixIcon: suffixIcon != null
+            ? IconButton(onPressed: showPassfunc, icon: Icon(suffixIcon))
+            : null,
+      ),
+    );

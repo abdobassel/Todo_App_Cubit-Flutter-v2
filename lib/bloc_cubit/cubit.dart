@@ -18,6 +18,15 @@ class AppCubit extends Cubit<AppBaseStates> {
     ArchivedTasksScreen(),
   ];
   bool isbootmSheetOpen = false;
+  void changeOpenCloseSheet({
+    required bool isShow,
+    required IconData icon,
+  }) {
+    isbootmSheetOpen = isShow;
+    fabicon = icon;
+    emit(AppOpenCloseBottomSheetState());
+  }
+
   IconData fabicon = Icons.edit;
   void changeIconsheet() {
     if (isbootmSheetOpen) {
@@ -82,9 +91,27 @@ class AppCubit extends Cubit<AppBaseStates> {
     });
   }
 
+  List<Map> tasks = [];
+  List<Map> newTask = [];
+  List<Map> doneTask = [];
+  List<Map> archiveTask = [];
   void getDatabase(database) {
-    database.rawQuery('SELECT * FROM tasks').then((value) {
+    newTask = [];
+    doneTask = [];
+    archiveTask = [];
+    database!.rawQuery('SELECT * FROM tasks').then((value) {
       print(value);
+      value.forEach((element) {
+        if (element['status'] == 'new') {
+          newTask.add(element);
+          print(element);
+        } else if (element['status'] == 'done') {
+          doneTask.add(element);
+        } else {
+          archiveTask.add(element);
+        }
+      });
+
       emit(AppGetDatabase());
     });
   }

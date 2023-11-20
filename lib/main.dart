@@ -15,6 +15,17 @@ class Todo_v2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(backgroundColor: Color(0xff614A99)),
+        bottomNavigationBarTheme:
+            BottomNavigationBarThemeData(backgroundColor: Color(0xff614A99)),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xff614A99),
+          // ···
+          brightness: Brightness.dark,
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: HomeLayout(),
     );
